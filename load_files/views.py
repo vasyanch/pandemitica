@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from google.cloud import bigquery, storage
+from time import sleep
 
 from .forms import SignupForm, LoadFileForm, LoginForm
 from .models import File, FileType
@@ -73,19 +74,22 @@ class FileProcessingView(View):
     template_name_load_result = 'load_files/files_load_result.html'
 
     def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.context = {'error': ''}
 
     def get(self, request, *args, **kwargs):
         user = request.user
         if user.is_authenticated:
             user_files = File.objects.filter(user_id=user.id).all()
-            if user_files:
-                files_path = {f'{file.file_type.file_type}': file.get_path for file in user_files}
-                self.context['load_result'] = self.load_files_to_storage(files_path)
-                return render(request, self.template_name_load_result, self.context)
-            else:
-                self.context['error'] = 'You need load file'
+            temp_ans = [(key.file_type_human, True) for key in FileType.objects.all()]
+            # if user_files:
+            #     files_path = {f'{file.file_type.file_type}': file.get_path for file in user_files}
+            #     self.context['load_result'] = self.load_files_to_storage(files_path)
+            #     return render(request, self.template_name_load_result, self.context)
+            #sleep(5)
+            self.context['load_result'] = temp_ans
+            # else:
+            #     self.context['error'] = 'You need load file'
         else:
             self.context['error'] = 'You need authorization to process file'
         return render(request, self.template_name, self.context)
@@ -117,9 +121,10 @@ class FileProcessingView(View):
         return ans
 
 
+
+
 class ProfileView(View):
     template_name = 'users/profile.html'
-
     def __init__(self, *args, **kwargs):
         super(ProfileView, self).__init__(*args, **kwargs)
         self.context = {'error': ''}

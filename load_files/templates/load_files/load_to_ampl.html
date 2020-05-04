@@ -1,0 +1,28 @@
+{%  extends 'base.html' %}
+
+{% block main_container %}
+  <main class="container">
+    <div class="row">
+      <div class="col-8 col-lg-5 offset-2 offset-lg-4">
+        <div class="text-center mt-5 b-1">
+		  {% if load_result %}
+            <h2 id='finish'>Загрузка завершена! </h2>
+          {% else %}
+            <h2 id='loading' >Идет загрузка... </h2>
+		  {% endif %}
+
+        </div>
+		  <div id='finish_txt'>
+		   <h5>Что делать дальше: </h5>
+		    <h5>&#8226; Посмотрите пример дашборда</h5>
+			 <h5>&#8226; Пройдите курс GoPractive</h5>
+
+		  </div>
+
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+{%  endblock %}
