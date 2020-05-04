@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/')]
 
-STATIC_ROOT = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # path to json file with credentials to google-storage
 GOOGLE_STORAGE_CRED = \
