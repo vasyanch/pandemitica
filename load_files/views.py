@@ -30,6 +30,9 @@ class SelectFileTypeView(View):
         self.context = {'file_types': FileType.objects.order_by('id').all()}
 
     def get(self, request, *args, **kwargs):
+        self.context['user'] = request.user
+        if not self.context['user'].is_authenticated:
+            self.context['error'] = 'You need authorization to load file'
         return render(request, self.template_name, self.context)
 
 
@@ -42,7 +45,11 @@ class LoadFileView(View):
         self.context = {'error': ''}
 
     def get(self, request, *args, **kwargs):
-        self.context['form'] = self.form()
+        self.context['user'] = request.user
+        if self.context['user'].is_authenticated:
+            self.context['form'] = self.form()
+        else:
+            self.context['error'] = 'You need authorization to load file'
         return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
@@ -54,8 +61,10 @@ class LoadFileView(View):
                 #url = request.POST.get('continue', request.path)
                 self.context['load_success'] = True
                 return render(request, self.template_name, self.context)
+            else:
+                self.context['error'] = 'Invalid file format'
         else:
-            self.context['error'] = 'You need authorization to load file'
+            self.context['aut_error'] = 'You need authorization to load file'
         return render(request, self.template_name, self.context)
 
 

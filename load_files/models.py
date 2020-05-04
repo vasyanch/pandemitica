@@ -7,6 +7,8 @@ from django.urls import reverse
 
 class FileType(models.Model):
     file_type = models.CharField(max_length=400, unique=True)
+    file_type_human = models.CharField(max_length=400, unique=True)
+    image_path = models.CharField(max_length=1000)
 
 
 def file_directory_path(instance, filename):
@@ -22,9 +24,6 @@ class File(models.Model):
     def get_path(self):
         media_path = f'media/file_type_{self.file_type.file_type}/{self.filename}'  # разобраться как грузить файлы
         return os.path.join(settings.BASE_DIR, media_path)
-
-
-
 
 
 

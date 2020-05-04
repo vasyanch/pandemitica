@@ -9,7 +9,7 @@
 	body{
   background: #383d41;
 }
-form{
+.form_load{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -19,7 +19,7 @@ form{
   height: 200px;
   border: 4px dashed #fff;
 }
-form p{
+.form_p{
   width: 100%;
   height: 100%;
   text-align: center;
@@ -27,7 +27,7 @@ form p{
   color: #ffffff;
   font-family: sans-serif;
 }
-form input{
+.form_input{
   position: absolute;
   margin: 0;
   padding: 0;
@@ -36,7 +36,7 @@ form input{
   outline: none;
   opacity: 0;
 }
-form button{
+.form_button{
   margin: 0;
   color: #f2f2f2;
   background: #dc3545;
@@ -51,11 +51,11 @@ form button{
   transition: all .2s ease;
   outline: none;
 }
-form button:hover{
+.form_button:hover{
   background: #dc3545;
 	color: #f2f2f2;
 }
-form button:active{
+.form_button:active{
   border:0;
 }
 

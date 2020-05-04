@@ -2,30 +2,24 @@
 
 {%  block main_container %}
   <main class="container">
-    <div class="row">
-      <div class="col-8 col-lg-5 offset-2 offset-lg-4">
-        <form action=# class="form-signin pt-5" method="post">
-          <input id="csrf_token" name="csrf_token" type="hidden" value="IjJlYTcxYzBjZTcwNzVhMzFlYzE0YzM3NGRhM2UxN2NkOWRlYzE0ZjYi.Xq7DpQ.4-66wa9DTlEbKhFnyvbE5vwzcVA">
-
-          <div class="text-center mt-5 b-1">
-		  <h2>Мои файлы </h2>
-		  <div class="shadow-none p-3 mb-5 bg-light rounded">
-
-		  <h3>События(обязательный) <span class="badge badge-success">Ok</span></h3>  <!-- добавлять  <span class="badge badge-success">Ok</span>  -->
-		  <h3>Пациенты <span class="badge badge-success">Ok</span></h3>
-		  <h3>Процедуры </h3>
-		  <h3>Медикаменты </h3>  <!-- генерить  <span class="badge badge-danger">Error</span>  -->
-		  <h3>Анализы </h3>
-		  <h3>Врачи </h3>
-		  </div>
-
-
+    {% if user.is_authenticated %}
+        <div class="row">
+          <div class="col-8 col-lg-5 offset-2 offset-lg-4 mt-5">
+            <h2>Мои файлы </h2>
+            <div class="shadow-none p-3 mb-5 bg-light rounded">
+              {% for file_type in file_types %}
+                <h3>
+                  <a href="{% url 'load_files:load_file' file_type.file_type %}" class="btn btn btn-warning btn-block">{{ file_type.file_type_human }}</a>
+    {#              <span class="badge badge-success">Ok</span>#}
+                </h3>
+              {% endfor %}
+            </div>
+            <a class="btn btn-lg btn-danger btn-block" href="{% url 'load_files:file_processing' %}">Начать обработку</a>
           </div>
-			<input class="btn btn-lg btn-danger btn-block" id="submit1" name="submit" type="submit" value="Загрузить данные">
-          <input class="btn btn-lg btn-danger btn-block" id="submit2" name="submit" type="submit" value="Начать обработку">
-        </form>
-      </div>
-    </div>
+        </div>
+    {% else %}
+      <div class="alert alert-warning">{{ error }}</div>
+    {% endif %}
   </main>
 
 {% endblock %}
