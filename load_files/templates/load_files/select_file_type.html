@@ -1,47 +1,6 @@
-<!DOCTYPE html>
-<!-- saved from url=(0050)https://stepik-flask-delivery.herokuapp.com/login/ -->
-<html lang="ru">
-<script type="text/javascript" src="chrome-extension://ffljdddodmkedhkcjhpmdajhjdbkogke/js/datalayer-checker.js"></script>
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+{%  extends 'base.html' %}
 
-  <title>Pandemitica</title>
-  <link rel="stylesheet" href="./boostrapf/reglog.min.css">
-  <style>
-    html {
-      position: relative;
-      min-height: 100%;
-
-    }
-    body {
-      margin-bottom: 70px; /* Margin bottom by footer height */
-	  background-color: #383d41;
-	  .text-muted {
-    color: #f2f2f2;
-}
-    }
-    .navbar {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  </style>
-<script>
-			window.SBX_dlc=window.SBX_dlc||{};
-			window.SBX_dlc.settings=JSON.parse("{\"toolBar\":false,\"consoleLog\":false,\"eventColors\":true,\"eventCustomColors\":{\"custom1\":\"\",\"custom2\":\"\",\"custom3\":\"\"},\"gtmInjectId\":\"\",\"gtmInjectRule\":\"\",\"preventDefault\":false,\"jsonDefaultViewMode\":false}");
-		</script></head>
-
-<body>
-
-   <header class="container mt-3">
-    <nav class="py-1 navbar navbar-dark bg-dark">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <p class=" h5 my-2 text-white bg-dark"><a href=# class="navbar-brand">Pandemitica</a></p>
-      </ul>
-        <a href=# class="btn btn-warning btn-sm ml-4">Войти</a>
-        <a href=# class="btn btn-warning btn-sm ml-4">Регистрация</a>
-
-    </nav>
-  </header>
-
+{%  block main_container %}
   <main class="container">
     <div class="row">
       <div class="col-8 col-lg-5 offset-2 offset-lg-4">
@@ -69,4 +28,4 @@
     </div>
   </main>
 
-</body></html>
+{% endblock %}

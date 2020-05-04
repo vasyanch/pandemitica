@@ -27,7 +27,7 @@ class SelectFileTypeView(View):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.context = {'file_types': FileType.objects.order_by(id)}
+        self.context = {'file_types': FileType.objects.order_by('id').all()}
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.context)
@@ -139,12 +139,8 @@ class SignUpView(View):
     def post(self, request, *args, **kwargs):
         form = self.form(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            username = new_user.get_username()
-            password = request.POST.get('password1')
-            user = authenticate(request, username=username, password=password)
-            login(request, user)
-            url = request.POST.get('continue', '/')
+            form.save()
+            url = request.POST.get('continue', '/load_files/login/')
             return HttpResponseRedirect(url)
         self.context['form'] = form
         return render(request, self.template_name, self.context)
