@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# custom
+.idea
+my_log.md
+/load_files/templates/шаблоны

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block main_container %}
+
+  <main class="container">
+    <div class="row">
+      <div class="col-8 col-lg-4 offset-2 offset-lg-4">
+        <div class="text-center mt-5 b-1">
+			<h2>Войдите, чтобы начать загрузку</h2>
+        </div>
+
+        <form action="{% url 'load_files:login' %}" class="form-signin pt-5" method="post">
+          {% csrf_token %}
+          {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+          {% endif %}
+          <div class="mt-5 form-label-group">
+            <label class="text-muted" for="{{ form.username.id_for_label }}">Электронная почта</label>
+            {{ form.username.errors }}
+            {{ form.username }}
+            <label for="inputEmail"></label>
+          </div>
+
+          <div class="form-label-group">
+            <label class="text-muted" for="password">Пароль</label>
+            {{ form.password.errors }}
+            {{ form.password }}
+            <label for="inputPassword"></label>
+          </div>
+
+          <input class="mt-3 btn btn-lg btn-danger btn-block" id="submit" name="submit" type="submit" value="Войти">
+        </form>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

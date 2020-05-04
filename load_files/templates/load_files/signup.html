@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block main_container %}
+
+  <main class="container">
+    <div class="row">
+      <div class="col-8 col-lg-4 offset-2 offset-lg-4">
+        <div class="text-center mt-6 b-2">
+          <h2>Создайте аккаунт</h2>
+        </div>
+          <form action="{% url 'load_files:signup' %}" class="form-signin pt-5" method="post">
+            {% csrf_token %}
+
+            <div class="mt-5 form-label-group">
+              <label class="text-muted" for="{{ form.username.id_for_label }}">Электронная почта</label>
+              {{ form.username.errors }}
+              {{ form.username }}
+              <label for="inputEmail"></label>
+            </div>
+
+            <div class="form-label-group">
+              <label class="text-muted" for="{{ form.password1.id_for_label }}">Пароль</label>
+              {{ form.password1.errors }}
+              {{ form.password1 }}
+              <label for="inputPassword"></label>
+            </div>
+            <div class="form-label-group">
+              <label class="text-muted" for="{{ form.password2.id_for_label }}">Повторите пароль</label>
+              {{ form.password2.errors }}
+              {{ form.password2 }}
+              <label for="inputPassword"></label>
+            </div>
+            <div class="checkbox mb-3"></div>
+            <input class="btn btn-lg btn-danger btn-block" id="submit" name="submit" type="submit" value="Зарегистрироваться">
+          </form>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}
