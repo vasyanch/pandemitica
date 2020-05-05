@@ -3,7 +3,7 @@ from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.utils.translation import gettext_lazy
 
-from .models import User, File
+from .models import File
 
 
 class SignupForm(UserCreationForm):
@@ -27,14 +27,7 @@ class SignupForm(UserCreationForm):
 class LoadFileForm(forms.ModelForm):
     class Meta:
         model = File
-        fields = ['file']
-
-    def clear_file(self):
-        file = self.cleaned_data.get('file')
-        # тут надо добавить проверку что файл csv
-        # if file is not None:
-        #    raise forms.ValidationError('Wrong format of picture')
-        return file
+        fields = ['file', 'file_type', 'user']
 
 
 class LoginForm(AuthenticationForm):
@@ -52,29 +45,3 @@ class LoginForm(AuthenticationForm):
             'class': 'form-control',
             'id': 'password',
         }))
-
-"""class ChangeFieldsForm(forms.Form):
-    new_email = forms.EmailField(max_length=100)
-    new_avatar = forms.ImageField(required=False)
-
-    def clean_new_avatar(self):
-        new_avatar = self.cleaned_data.get('new_avatar')
-        if new_avatar is not None and'image' not in new_avatar.content_type:
-            raise forms.ValidationError('Wrong format of picture')
-        return new_avatar
-
-    def save(self):
-        return self.cleaned_data
-
-
-class UserProfileSignupForm(forms.ModelForm):
-
-    def clean_avatar(self):
-        avatar = self.cleaned_data.get('avatar')
-        if avatar is not None and 'image' not in avatar.content_type:
-            raise forms.ValidationError('Wrong format of picture')
-        return avatar
-
-    class Meta:
-        model = UserProfile
-        fields = ['avatar']"""

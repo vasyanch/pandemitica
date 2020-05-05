@@ -10,7 +10,6 @@
               {% for file_type in file_types %}
                 <h3>
                   <a href="{% url 'load_files:load_file' file_type.file_type %}" class="btn btn btn-warning btn-block">{{ file_type.file_type_human }}</a>
-    {#              <span class="badge badge-success">Ok</span>#}
                 </h3>
               {% endfor %}
             </div>

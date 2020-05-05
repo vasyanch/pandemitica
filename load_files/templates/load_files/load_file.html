@@ -59,14 +59,21 @@
       <div class="alert alert-danger">{{ error }}</div>
     {% endif %}
     {% if user.is_authenticated %}
-        <form action="{% url 'load_files:load_file' 'file'  %}" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          {{ form.file.errors }}
-          {{ form.file }}
-          <p>Перетащите сюда файлы или кликните на это поле.</p>
-          <button type="submit">Загрузить</button>
-          <button onclick="location.href='{% url 'load_files:select_file_type' %}'" type="button">Назад</button>
-        </form>
+        {% if load_success %}
+            <div class="alert alert-success">Файл успешно загружен</div>
+            <button onclick="location.href='{% url 'load_files:select_file_type' %}'" type="button">Назад</button>
+        {% else %}
+            <form action="{% url 'load_files:load_file' file_type.file_type  %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.file.errors }}
+              {{ form.file }}
+              <p>Перетащите сюда файлы или кликните на это поле.</p>
+              <input type="hidden" name="file_type" value="{{ file_type.id }}">
+              <input type="hidden" name="user" value="{{ user.id }}">
+              <button type="submit">Загрузить</button>
+              <button onclick="location.href='{% url 'load_files:select_file_type' %}'" type="button">Назад</button>
+            </form>
+        {% endif %}
     {% else %}
         <div class="alert alert-warning">{{ aut_error }}</div>
     {% endif %}

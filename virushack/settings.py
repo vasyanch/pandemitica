@@ -124,17 +124,25 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 
 
 
 # path to json file with credentials to google-storage
-GOOGLE_STORAGE_CRED = \
-    os.getenv('GOOGLE_STORAGE_CRED') if os.getenv('GOOGLE_STORAGE_CRED') else os.path.join(
+PANDEMITICA_GOOGLE_CLOUD_CRED = \
+    os.getenv('PANDEMITICA_GOOGLE_CLOUD_CRED') if os.getenv('PANDEMITICA_GOOGLE_CLOUD_CRED') else os.path.join(
         BASE_DIR, '/load_files/google_cloud_cred.json'
     )
 
-GOOGLE_BUCKET_NAME = 'virushack_pandemitica'
+PANDEMITICA_GOOGLE_BUCKET_NAME = 'virushack_pandemitica'
+
+PANDEMITICA_GOOGLE_CLOUD_PROJECT = 'advinternal-251711'
+
+PANDEMITICA_GOOGLE_BIGQUERY_DATASET = "Virushack2"
+
+PANDEMITICA_AMPLITUDE_API_KEY = os.getenv('PANDEMITICA_AMPLITUDE_API_KEY')
 
 django_heroku.settings(locals())
 

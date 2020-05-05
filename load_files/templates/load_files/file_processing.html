@@ -4,21 +4,19 @@
   <main class="container">
     <div class="row">
       <div class="col-8 col-lg-5 offset-2 offset-lg-4">
-{#      <h2>Результат обработки</h2>#}
         <div class="text-center mt-5 b-1">
-         <h2 id='loading'>Идет загрузка... </h2>
-{#          {% for file_type, status in load_result %}#}
-{#              <h3>#}
-{#                  <span class="btn btn-warning">{{ file_type }}</span>#}
-{#                  {% if status %}#}
-{#                    <span class="badge badge-success">Ok</span>#}
-{#                  {% else %}#}
-{#                    <span class="badge badge-danger">Error</span>#}
-{#                  {% endif %}#}
-{#              </h3>#}
-{#          {% endfor %}#}
-{#          <button onclick="location.href='{% url 'load_files:file_processing' %}'" type="button" class="btn btn-danger">Назад</button>#}
-{#          <button type="submit" class="btn btn-danger">Загрузить в Amplitude</button>#}
+          {% for file_type, status in load_result %}
+              <h3>
+                  <span class="btn btn-warning">{{ file_type }}</span>
+                  {% if status %}
+                    <span class="badge badge-success">Ok</span>
+                  {% else %}
+                    <span class="badge badge-danger">Error</span>
+                  {% endif %}
+              </h3>
+          {% endfor %}
+          <button onclick="location.href='{% url 'load_files:file_processing' %}'" type="button" class="btn btn-danger">Назад</button>
+          <button type="submit" class="btn btn-danger">Загрузить в Amplitude</button>
         </div>
       </div>
     </div>

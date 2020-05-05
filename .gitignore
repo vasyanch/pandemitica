@@ -132,3 +132,4 @@ dmypy.json
 .idea
 my_log.md
 /load_files/templates/шаблоны
+/media

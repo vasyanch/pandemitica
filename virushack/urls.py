@@ -24,5 +24,6 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('load_files/', include('load_files.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
+              static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

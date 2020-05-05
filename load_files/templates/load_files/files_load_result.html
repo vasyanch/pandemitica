@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main_container %}
+<main class="container">
+    <div class="row">
+      <div class="col-8 col-lg-5 offset-2 offset-lg-4">
+
+        <div class="text-center mt-5 b-1">
+          {% for file_type, status in load_result %}
+              <h3>
+                  <span class="btn btn-warning">{{ file_type }}</span>
+                  {% if status %}
+                    <span class="badge badge-success">Ok</span>
+                  {% else %}
+                    <span class="badge badge-danger">Error</span>
+                  {% endif %}
+              </h3>
+          {% endfor %}
+          {% for file_type, status in load_bigquery_result %}
+              <h3>
+                  <span class="btn btn-warning">{{ file_type }}</span>
+                  {% if status %}
+                    <span class="badge badge-success">Ok</span>
+                  {% else %}
+                    <span class="badge badge-danger">Error</span>
+                  {% endif %}
+              </h3>
+          {% endfor %}
+          {% if load_amplitude_result %}
+            <div><span>Загрузка в амплитуду</span><span class="badge badge-success">Ok</span></div>
+          {% else %}
+            <div><span>Загрузка в амплитуду</span><span class="badge badge-danger">Error</span></div>
+          {% endif %}
+          <button onclick="location.href='{% url 'load_files:file_processing' %}'" type="button" class="btn btn-danger">Назад</button>
+          <button type="submit" class="btn btn-danger">Загрузить в Amplitude</button>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}
